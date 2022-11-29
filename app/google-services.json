@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "437693364560",
+    "project_id": "varsity-management",
+    "storage_bucket": "varsity-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437693364560:android:031e92cc43916073d41455",
+        "android_client_info": {
+          "package_name": "com.varsity_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437693364560-mkobk6kq8aaj2j8utju35fr71s9kps4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGGiZhvQoIrdWQa54Fy3VPJIp5dpJcoNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437693364560-mkobk6kq8aaj2j8utju35fr71s9kps4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
