@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.varsity_management.R;
 import com.varsity_management.utils.LocalStorage;
+import com.varsity_management.utils.NetworkUtils;
 
 import java.util.regex.Pattern;
 
@@ -33,6 +34,10 @@ public class SignInActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnSignIn)
     public void signBtnClicked() {
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            Toasty.error(SignInActivity.this, "Please Connect Internet!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String email = txtMail.getText().toString();
         String pass = txtPass.getText().toString();
         if (email.isEmpty()) {

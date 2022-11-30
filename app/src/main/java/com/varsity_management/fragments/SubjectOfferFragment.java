@@ -2,9 +2,11 @@ package com.varsity_management.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +17,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.varsity_management.R;
+import com.varsity_management.activities.SignUpActivity;
 import com.varsity_management.model.SubjectModel;
 import com.varsity_management.model.SubjectName;
+import com.varsity_management.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +38,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 public class SubjectOfferFragment extends Fragment {
 
@@ -48,19 +61,36 @@ public class SubjectOfferFragment extends Fragment {
 
     @OnClick(R.id.btnSubmit)
     public void onSubmitBtnClicked() {
+
+        if (!NetworkUtils.isNetworkConnected(getActivity())) {
+            Toasty.error(getActivity(), "Please Connect Internet!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (TextUtils.isEmpty(txtSemester.getText().toString())) {
-            Toast.makeText(getContext(), "Select Semester", Toast.LENGTH_SHORT).show();
+            Toasty.warning(getContext(), "Select Semester", Toast.LENGTH_SHORT).show();
         } else if (subLayout.getChildCount() == 0) {
-            Toast.makeText(getContext(), "Add Subject", Toast.LENGTH_SHORT).show();
+            Toasty.warning(getContext(), "Add Subject", Toast.LENGTH_SHORT).show();
         } else {
             if (isValidData()) {
-                subjectModel = new SubjectModel(semesterName, subjectNameList);
-                subjectModelList.add(subjectModel);
-               FirebaseDatabase.getInstance().getReference().child("Subject Offer").setValue(subjectModel);
+                /*subjectModel = new SubjectModel(semesterName, subjectNameList);
+                subjectModelList.add(subjectModel);*/
+
+                databaseReference.child(semesterName).setValue(subjectNameList).addOnSuccessListener(unused -> Toasty.success(getActivity(), "Subject Added Successful", Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toasty.error(getActivity(), "Subject Adding Field : " + e.getMessage(), Toast.LENGTH_SHORT).show());
             } else {
-                Toast.makeText(getContext(), "Enter Subject Code And Name", Toast.LENGTH_SHORT).show();
+                Toasty.warning(getContext(), "Enter Subject Code And Name or Credit", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void showData() {
+        databaseReference.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            } else {
+                subjectModel = task.getResult().getValue(SubjectModel.class);
+                Log.d(TAG, "showData: " + task.getResult().getValue());
+            }
+        });
     }
 
     public SubjectOfferFragment() {
@@ -74,21 +104,27 @@ public class SubjectOfferFragment extends Fragment {
     private SubjectName subjectName;
     private List<SubjectModel> subjectModelList;
     private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_subject_offer, container, false);
         ButterKnife.bind(this, view);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("Subject Offer");
         setSemester();
         subjectNameList = new ArrayList<>();
         txtSemester.setOnItemClickListener((adapterView, view1, i, l) -> {
             semesterName = semesterList.get(i);
         });
         subjectModelList = new ArrayList<>();
+        subjectModel = new SubjectModel();
+
+        showData();
         return view;
     }
+
     private void setSemester() {
         semesterList = new ArrayList<>();
         semesterList.add("1st Semester");
@@ -103,7 +139,7 @@ public class SubjectOfferFragment extends Fragment {
         semesterList.add("10th Semester");
         semesterList.add("11th Semester");
         semesterList.add("12th Semester");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.prof_autocomplete, R.id.txtDropdown, semesterList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.prof_autocomplete, R.id.txtDropdown, semesterList);
         txtSemester.setAdapter(adapter);
     }
 
@@ -128,9 +164,11 @@ public class SubjectOfferFragment extends Fragment {
         for (int i = 0; i < subLayout.getChildCount(); i++) {
             View subView = subLayout.getChildAt(i);
             EditText txtSubNameAndCode = subView.findViewById(R.id.txtSubCode);
+            EditText txtCredit = subView.findViewById(R.id.txtCredit);
             subjectName = new SubjectName();
-            if (!TextUtils.isEmpty(txtSubNameAndCode.getText().toString())) {
+            if (!TextUtils.isEmpty(txtSubNameAndCode.getText().toString()) || !TextUtils.isEmpty(txtCredit.getText().toString())) {
                 subjectName.setSubCodeName(txtSubNameAndCode.getText().toString());
+                subjectName.setCredit(Double.parseDouble(txtCredit.getText().toString()));
             } else {
                 result = false;
                 break;
