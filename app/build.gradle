@@ -62,4 +62,7 @@ dependencies {
 
     //Toasty
     implementation 'com.github.GrenderG:Toasty:1.5.2'
+
+    //folding cell
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
 }

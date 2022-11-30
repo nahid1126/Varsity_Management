@@ -72,27 +72,15 @@ public class SubjectOfferFragment extends Fragment {
             Toasty.warning(getContext(), "Add Subject", Toast.LENGTH_SHORT).show();
         } else {
             if (isValidData()) {
-                /*subjectModel = new SubjectModel(semesterName, subjectNameList);
-                subjectModelList.add(subjectModel);*/
-
-                databaseReference.child(semesterName).setValue(subjectNameList).addOnSuccessListener(unused -> Toasty.success(getActivity(), "Subject Added Successful", Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toasty.error(getActivity(), "Subject Adding Field : " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                databaseReference.child(semesterName).setValue(subjectNameList).addOnSuccessListener(unused -> {
+                    Toasty.success(getActivity(), "Subject Added Successful", Toast.LENGTH_SHORT).show();
+                    clearFiled();
+                }).addOnFailureListener(e -> Toasty.error(getActivity(), "Subject Adding Field : " + e.getMessage(), Toast.LENGTH_SHORT).show());
             } else {
                 Toasty.warning(getContext(), "Enter Subject Code And Name or Credit", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    private void showData() {
-        databaseReference.get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e("firebase", "Error getting data", task.getException());
-            } else {
-                subjectModel = task.getResult().getValue(SubjectModel.class);
-                Log.d(TAG, "showData: " + task.getResult().getValue());
-            }
-        });
-    }
-
     public SubjectOfferFragment() {
         // Required empty public constructor
     }
@@ -120,8 +108,6 @@ public class SubjectOfferFragment extends Fragment {
         });
         subjectModelList = new ArrayList<>();
         subjectModel = new SubjectModel();
-
-        showData();
         return view;
     }
 
@@ -177,6 +163,10 @@ public class SubjectOfferFragment extends Fragment {
         }
 
         return result;
+    }
+
+    private void clearFiled() {
+
     }
 
 }

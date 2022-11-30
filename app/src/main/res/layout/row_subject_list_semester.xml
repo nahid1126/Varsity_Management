@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <com.ramotion.foldingcell.FoldingCell
+                android:id="@+id/foldingCell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--<FrameLayout
+                    android:id="@+id/cellContentView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/main_color"
+                            android:paddingLeft="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="12dp"
+                            android:paddingBottom="7dp">
+
+                            <TextView
+                                android:id="@+id/txtOwnerIdContent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="Invoice Id"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <ImageView
+                                android:id="@+id/imgDropDownClose"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_check" />
+
+
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/bg_color"
+                            android:orientation="vertical"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="9dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="6dp">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/contentAvatar"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerVertical="true"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/placeholder" />
+
+                                <TextView
+                                    android:id="@+id/txtTenantNameContent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@id/contentAvatar"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:layout_toEndOf="@id/contentAvatar"
+                                    android:layout_toRightOf="@id/contentAvatar"
+                                    android:text="Bill Title"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtBillDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtTenantNameContent"
+                                    android:layout_alignStart="@id/txtTenantNameContent"
+                                    android:layout_alignLeft="@id/txtTenantNameContent"
+                                    android:gravity="center"
+                                    android:text="Bill Create Date"
+                                    android:textAlignment="center" />
+
+                                <TextView
+                                    android:id="@+id/txtBillDetailsStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="2dp"
+                                    android:background="@drawable/round_rectangle_border_green"
+                                    android:fontFamily="@font/roboto_black"
+                                    android:gravity="center"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Status"
+                                    android:textColor="@color/main_color"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtBillPeriodDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtBillDate"
+                                    android:layout_alignStart="@+id/txtBillDate"
+                                    android:gravity="center"
+                                    android:text="Bill Create Date"
+                                    android:textAlignment="center" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/color_PrimaryLight"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_1sdp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/main_color"
+                                    android:text="Bill"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_white"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/main_color"
+                                    android:text="Amount"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_white"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="House Rent"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtHouseRent"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 230 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Electricity Bill"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtElectricity"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 879 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Gas Bill"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtGasBill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 780 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Water Bill"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtWaterBill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 765 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Parking Bill"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtParkingBill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 765 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Service Charge"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtServiceCharge"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 765 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Internet Bill"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtInternetBill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 0 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Dish Bill"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtDishBill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 765 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:paddingLeft="4dp"
+                                    android:text="Others Bil"
+                                    android:textColor="@color/color_black" />
+
+                                <TextView
+                                    android:id="@+id/txtOtherBill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/color_white"
+                                    android:text="TK. 267 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/main_color"
+                                    android:text="Total Bill"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_white"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtTotal"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:background="@color/main_color"
+                                    android:text="TK. 7800 /="
+                                    android:textAlignment="center"
+                                    android:textColor="@color/color_white"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutInvoiceModify"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <TextView
+                                android:id="@+id/btnUpdate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="2dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/blue_border_rounded_corner"
+                                android:backgroundTint="@color/main_color"
+                                android:padding="6dp"
+                                android:text="EDIT"
+                                android:textAlignment="center"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/btnDelete"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="2dp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/blue_border_rounded_corner"
+                                android:backgroundTint="@color/color_RedLight"
+                                android:padding="6dp"
+                                android:text="DELETE"
+                                android:textAlignment="center"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/btnPaid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="2dp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/blue_border_rounded_corner"
+                                android:backgroundTint="@color/color_orange_light"
+                                android:padding="6dp"
+                                android:text="RECEIVE"
+                                android:textAlignment="center"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </FrameLayout>-->
+
+                <FrameLayout
+                    android:id="@+id/cell_title_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="62dp"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:background="@drawable/shadow_background"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="15dp"
+                            android:gravity="center_horizontal"
+                            android:padding="15dp">
+
+                            <ImageView
+                                android:id="@+id/title_from_to_dots"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_book"
+                                app:tint="@color/main_color" />
+
+                            <TextView
+                                android:id="@+id/txtSemesterName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fadingEdge="horizontal"
+                                android:textAlignment="center"
+                                android:text="Semester"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:id="@+id/imgDropDownOpen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_drop_down" />
+
+                            <TextView
+                                android:id="@+id/txtTotalCredit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txtSemesterName"
+                                android:textAlignment="center"
+                                android:text="abcd@gmail.com"
+                                android:textColor="@android:color/black"
+                                android:textSize="10sp" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </com.ramotion.foldingcell.FoldingCell>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
