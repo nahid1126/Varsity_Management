@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,9 +34,14 @@ public class SignInActivity extends AppCompatActivity {
     @BindView(R.id.txtPass)
     EditText txtPass;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
     @OnClick(R.id.btnSignIn)
     public void signBtnClicked() {
+        progressBar.setVisibility(View.VISIBLE);
         if (!NetworkUtils.isNetworkConnected(this)) {
+            progressBar.setVisibility(View.GONE);
             Toasty.error(SignInActivity.this, "Please Connect Internet!!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -42,12 +49,15 @@ public class SignInActivity extends AppCompatActivity {
         String pass = txtPass.getText().toString();
         if (email.isEmpty()) {
             txtMail.requestFocus();
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(this, "Please Enter Varsity Mail", Toast.LENGTH_SHORT).show();
         } else if (!isValidEmailId(email.trim())) {
             txtMail.requestFocus();
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(this, "Enter Varsity Mail", Toast.LENGTH_SHORT).show();
         } else if (pass.isEmpty()) {
             txtPass.requestFocus();
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(this, "Please Enter Password", Toast.LENGTH_SHORT).show();
         } else {
             firebaseAuth.signInWithEmailAndPassword(email, pass).addOnSuccessListener(authResult -> {
@@ -62,8 +72,12 @@ public class SignInActivity extends AppCompatActivity {
                     startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     finish();
                 });
+                progressBar.setVisibility(View.GONE);
                 Toasty.success(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-            }).addOnFailureListener(e -> Toasty.error(SignInActivity.this, "Login Failed! :" + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }).addOnFailureListener(e -> {
+                progressBar.setVisibility(View.GONE);
+                Toasty.error(SignInActivity.this, "Login Failed! :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
         }
 
     }

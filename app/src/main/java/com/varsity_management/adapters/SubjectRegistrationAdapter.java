@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,19 +20,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubjectOfferAdapter extends RecyclerView.Adapter<SubjectOfferAdapter.ViewHolder> {
+public class SubjectRegistrationAdapter extends RecyclerView.Adapter<SubjectRegistrationAdapter.ViewHolder> {
     private static final String TAG = "SubjectOfferAdapter";
     private List<SubjectModel> subjectModelList;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_subject_list_semester, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_semester_registration, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubjectOfferAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SubjectRegistrationAdapter.ViewHolder holder, int position) {
         SubjectModel subjectModel = subjectModelList.get(position);
 
         double totalCredit = 0.0;
@@ -49,6 +50,8 @@ public class SubjectOfferAdapter extends RecyclerView.Adapter<SubjectOfferAdapte
         holder.txtTotal.setText(String.valueOf(totalCredit));
         holder.txtSubjectCredit.setText(String.valueOf(stringBuilderCredit));
 
+        holder.btnAdd.setOnClickListener(view -> Toast.makeText(view.getContext(), "clicked", Toast.LENGTH_SHORT).show());
+        
         holder.foldingCell.setOnClickListener(view -> holder.foldingCell.toggle(false));
     }
 
@@ -89,6 +92,9 @@ public class SubjectOfferAdapter extends RecyclerView.Adapter<SubjectOfferAdapte
 
         @BindView(R.id.txtSemester)
         TextView txtSemester;
+
+        @BindView(R.id.btnAdd)
+        TextView btnAdd;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -50,8 +50,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, SubjectOfferListActivity.class));
     }
 
+    @OnClick(R.id.layoutRegistration)
+    public void onRegistrationClicked() {
+        startActivity(new Intent(MainActivity.this, SubjectRegistrationActivity.class));
+    }
+
     private LocalStorage localStorage;
     private FirebaseFirestore fireStore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
