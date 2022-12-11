@@ -9,7 +9,7 @@ public class SubjectName implements Serializable {
     public SubjectName() {
     }
 
-    public SubjectName(String subCodeName,double credit) {
+    public SubjectName(String subCodeName, double credit) {
         this.subCodeName = subCodeName;
         this.credit = credit;
     }
@@ -32,9 +32,6 @@ public class SubjectName implements Serializable {
 
     @Override
     public String toString() {
-        return "SubjectName{" +
-                "subCodeName='" + subCodeName + '\'' +
-                "credit='" + credit + '\'' +
-                '}';
+        return "SubjectName{" + "subCodeName='" + subCodeName + '\'' + "credit='" + credit + '\'' + '}';
     }
 }

@@ -88,9 +88,7 @@ public class SubjectOfferFragment extends Fragment {
     private List<SubjectName> subjectNameList;
     private List<String> semesterList;
     private String semesterName;
-    private SubjectModel subjectModel;
     private SubjectName subjectName;
-    private List<SubjectModel> subjectModelList;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
@@ -106,8 +104,6 @@ public class SubjectOfferFragment extends Fragment {
         txtSemester.setOnItemClickListener((adapterView, view1, i, l) -> {
             semesterName = semesterList.get(i);
         });
-        subjectModelList = new ArrayList<>();
-        subjectModel = new SubjectModel();
         return view;
     }
 
